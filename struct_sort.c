@@ -13,11 +13,14 @@ int main(int argc, char *argv[]){
     //reading file
     FILE *file;
     int c;
+    Contacts contacts;
 
     //printf("%s", "contacts.txt");
-    file = fopen(argv[2], "r");
+    file = fopen(argv[1], "r");
     while (1){
         c = fgetc(file);
+        Contact person;
+        
         if(feof(file)){
             break;
         }

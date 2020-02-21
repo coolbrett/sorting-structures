@@ -17,14 +17,12 @@ int main(int argc, char *argv[]){
 
     //printf("%s", "contacts.txt");
     file = fopen(argv[1], "r");
-    while (1){
+    while (!feof(file)){
         c = fgetc(file);
         Contact person;
-        
-        if(feof(file)){
-            break;
-        }
-        printf("%c", c);
+        //printf("%c", c);
+        char *line = fgets(line, c, file);
+        printf("%s", *line);
     }
     fclose(file);
     return (0);

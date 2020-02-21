@@ -2,8 +2,8 @@
 #include <string.h>
 #define NUM_CONSTANT 100
 #define STATE_CONSTANT 3
-#define TELEPHONE_CONSTANT 12
-#define ZIP_CONSTANT 5
+#define TELEPHONE_CONSTANT 14
+#define ZIP_CONSTANT 6
 
 typedef struct Contact{
     char *first_name[NUM_CONSTANT];
@@ -15,6 +15,6 @@ typedef struct Contact{
     char *telephone[TELEPHONE_CONSTANT];
 }Contact;
 
-typedef struct Contacts {
+typedef struct Contacts{
     struct Contact contacts[NUM_CONSTANT];
 }Contacts;

@@ -16,36 +16,62 @@ void trim(char *string) {
     memmove(string, ptr, length + 1);
 }
 
-void sort(Contacts contacts) {
+void sort(Contact contacts[]) {
 
 }
 
-int main(int argc, char *argv[]){
-    //read file and keep adding to contacts array
-    //FILE HAS TO COME FROM COMMAND LINE
-
-    //reading file
-    FILE *file;
-    FILE *output;
-    Contacts contacts;
-
-    file = fopen(argv[1], "r");
+void readFile(FILE *file){
+    Contact contacts[NAME];
     char str[NUM];
+    int i = 0;
     while (fgets(str, NUM, file) != NULL){
         Contact contact;
         char *token = strtok(str, ",\t");
         if (token != NULL) {
             trim(token);
-            contact.first_name = token;
-            printf("%s", contact.first_name);
+            strcpy(contact.first_name, token);
             token = strtok(NULL, ",");
         }
         if (token != NULL){
             trim(token);
-            contact.last_name = token;
-            printf("%s", contact.last_name);
+            strcpy(contact.last_name, token);
+            token = strtok(NULL, ",");
         }
+        if (token != NULL){
+            trim(token);
+            strcpy(contact.address.street, token);
+            token = strtok(NULL, ",");
+        }
+        if (token != NULL){
+            trim(token);
+            strcpy(contact.address.city, token);
+            token = strtok(NULL, ",");
+        }
+        if (token != NULL){
+            trim(token);
+            strcpy(contact.address.state, token);
+            token = strtok(NULL, ",");
+        }
+        if (token != NULL){
+            trim(token);
+            strcpy(contact.address.zip, token);
+            token = strtok(NULL, ",");
+        }
+        if(token != NULL){
+            trim(token);
+            strcpy(contact.telephone, token);
+        }
+        contacts[i] = contact;
+        i++;
     }
+}
+
+int main(int argc, char *argv[]){
+    FILE *file;
+    FILE *output;
+
+    file = fopen(argv[1], "r");
+    readFile(file);
     fclose(file);
     return (0);
 }

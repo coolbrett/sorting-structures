@@ -1,20 +1,27 @@
 #include <stdio.h>
 #include <string.h>
-#define NUM_CONSTANT 100
-#define STATE_CONSTANT 3
-#define TELEPHONE_CONSTANT 14
-#define ZIP_CONSTANT 6
+#define NUM 100
+#define STREET 30
+#define NAME 20
+#define STATE 3
+#define ZIP 6
+#define TELEPHONE 13
 
-typedef struct Contact{
-    char *first_name[NUM_CONSTANT];
-    char *last_name[NUM_CONSTANT];
-    char *street[NUM_CONSTANT];
-    char *city[NUM_CONSTANT];
-    char *state[STATE_CONSTANT];
-    int *zip[ZIP_CONSTANT];
-    char *telephone[TELEPHONE_CONSTANT];
+
+typedef struct {
+    char street[STREET];
+    char city[STREET];
+    char state[STATE];
+    char zip[ZIP];
+}Address;
+
+typedef struct {
+    char *first_name[NAME];
+    char *last_name[NAME];
+    Address address;
+    char *telephone[TELEPHONE];
 }Contact;
 
-typedef struct Contacts{
-    struct Contact contacts[NUM_CONSTANT];
+typedef struct {
+    Contact contacts[NAME];
 }Contacts;

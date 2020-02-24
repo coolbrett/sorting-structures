@@ -16,10 +16,10 @@ typedef struct {
 }Address;
 
 typedef struct {
-    char *first_name[NAME];
-    char *last_name[NAME];
+    char *first_name;
+    char *last_name;
     Address address;
-    char *telephone[TELEPHONE];
+    char *telephone;
 }Contact;
 
 typedef struct {

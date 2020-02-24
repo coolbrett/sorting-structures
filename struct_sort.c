@@ -13,7 +13,6 @@ void trim(char *string) {
     while(*ptr && isspace(*ptr)){
         ++ptr, --length;
     }
-
     memmove(string, ptr, length + 1);
 }
 
@@ -35,11 +34,16 @@ int main(int argc, char *argv[]){
     while (fgets(str, NUM, file) != NULL){
         Contact contact;
         char *token = strtok(str, ",\t");
-        while(token != NULL) {
+        if (token != NULL) {
             trim(token);
-            contact.first_name = str;
-            printf("%c", contact.first_name);
+            contact.first_name = token;
+            printf("%s", contact.first_name);
             token = strtok(NULL, ",");
+        }
+        if (token != NULL){
+            trim(token);
+            contact.last_name = token;
+            printf("%s", contact.last_name);
         }
     }
     fclose(file);

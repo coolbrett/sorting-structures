@@ -32,7 +32,22 @@ void printContacts(Contact contacts[NAME]){
 }
 
 void sort(Contact contacts[NAME]) {
-
+    int RIGHT = 1;
+    int EQ = 0;
+    for (int i = 0; i < sizeof(contacts); ++i) {
+        for (int j = i + 1; j < sizeof(contacts); ++j) {
+            //-1 is left bigger, 1 is right bigger, 0 means equal
+            if (strcmpi(contacts[i].first_name, contacts[j].first_name) == RIGHT){
+                char temp[NAME];
+                strcpy(temp, contacts[j].first_name);
+                strcpy(contacts[j].first_name, contacts[i].first_name);
+                strcpy(contacts[i].first_name, temp);
+            }
+            else if (strcmpi(contacts[i].first_name, contacts[j].first_name) == EQ){
+                //check last name
+            }
+        }
+    }
 }
 
 void readFile(FILE *file, Contact contacts[NAME]) {

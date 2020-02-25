@@ -16,9 +16,9 @@ void trim(char *string) {
     memmove(string, ptr, length + 1);
 }
 
-void printContacts(Contact contacts[NAME]){
+void printContacts(Contact contacts[]){
     int i = 0;
-    while (i <= sizeof(contacts)){
+    while (i <= sizeof(contacts)) {
         printf("%s ", contacts[i].first_name);
         printf("%s ", contacts[i].last_name);
         printf("%s ", contacts[i].address.street);
@@ -31,11 +31,11 @@ void printContacts(Contact contacts[NAME]){
     printf("%s\n", "-------------------------------");
 }
 
-void sort(Contact contacts[NAME]) {
+void sort(Contact contacts[]) {
     int RIGHT = 1;
     int EQ = 0;
-    for (int i = 0; i < sizeof(contacts); ++i) {
-        for (int j = i + 1; j < sizeof(contacts); ++j) {
+    for (int i = 0; i <= sizeof(contacts); ++i) {
+        for (int j = i + 1; j <= sizeof(contacts); ++j) {
             //-1 is left bigger, 1 is right bigger, 0 means equal
             if (strcmpi(contacts[i].first_name, contacts[j].first_name) == RIGHT){
                 char temp[NAME];
@@ -44,13 +44,16 @@ void sort(Contact contacts[NAME]) {
                 strcpy(contacts[i].first_name, temp);
             }
             else if (strcmpi(contacts[i].first_name, contacts[j].first_name) == EQ){
-                //check last name
+                /*char temp[NAME];
+                strcpy(temp, contacts[j].last_name);
+                strcpy(contacts[j].last_name, contacts[i].last_name);
+                strcpy(contacts[i].last_name, temp);*/
             }
         }
     }
 }
 
-void readFile(FILE *file, Contact contacts[NAME]) {
+void readFile(FILE *file, Contact contacts[]) {
     char str[NUM];
     int i = 0;
     while (fgets(str, NUM, file) != NULL){

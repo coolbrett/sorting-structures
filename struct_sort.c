@@ -16,9 +16,9 @@ void trim(char *string) {
     memmove(string, ptr, length + 1);
 }
 
-void printContacts(Contact contacts[]){
+void printContacts(Contact contacts[], int num){
     int i = 0;
-    while (i <= sizeof(contacts)) {
+    while (i < num) {
         printf("%s ", contacts[i].first_name);
         printf("%s ", contacts[i].last_name);
         printf("%s ", contacts[i].address.street);
@@ -31,19 +31,19 @@ void printContacts(Contact contacts[]){
     printf("%s\n", "-------------------------------");
 }
 
-void sort(Contact contacts[]) {
+void sort(Contact contacts[], int num) {
     int RIGHT = 1;
     int EQ = 0;
-    for (int i = 0; i <= sizeof(contacts); ++i) {
-        for (int j = i + 1; j <= sizeof(contacts); ++j) {
+    for (int i = 0; i < num; ++i) {
+        for (int j = i + 1; j < num; ++j) {
             //-1 is left bigger, 1 is right bigger, 0 means equal
-            if (strcmpi(contacts[i].first_name, contacts[j].first_name) == RIGHT){
+            if (strcasecmp(contacts[i].first_name, contacts[j].first_name) == RIGHT){
                 char temp[NAME];
                 strcpy(temp, contacts[j].first_name);
                 strcpy(contacts[j].first_name, contacts[i].first_name);
                 strcpy(contacts[i].first_name, temp);
             }
-            else if (strcmpi(contacts[i].first_name, contacts[j].first_name) == EQ){
+            else if (strcasecmp(contacts[i].first_name, contacts[j].first_name) == EQ){
                 /*char temp[NAME];
                 strcpy(temp, contacts[j].last_name);
                 strcpy(contacts[j].last_name, contacts[i].last_name);
@@ -53,7 +53,7 @@ void sort(Contact contacts[]) {
     }
 }
 
-void readFile(FILE *file, Contact contacts[]) {
+int readFile(FILE *file, Contact contacts[]) {
     char str[NUM];
     int i = 0;
     while (fgets(str, NUM, file) != NULL){
@@ -96,6 +96,7 @@ void readFile(FILE *file, Contact contacts[]) {
         contacts[i] = contact;
         i++;
     }
+    return i;
 }
 
 int main(int argc, char *argv[]){
@@ -103,12 +104,12 @@ int main(int argc, char *argv[]){
     FILE *output;
     Contact contacts[NAME];
     file = fopen(argv[1], "r");
-    readFile(file, contacts);
+    int num = readFile(file, contacts);
     printf("%s\n", "\n[BEFORE SORT]\n-------------------------------");
-    printContacts(contacts);
-    sort(contacts);
+    printContacts(contacts, num);
+    sort(contacts, num);
     printf("%s\n", "\n[AFTER SORT]\n-------------------------------");
-    printContacts(contacts);
+    printContacts(contacts, num);
     fclose(file);
     return (0);
 }

@@ -16,12 +16,26 @@ void trim(char *string) {
     memmove(string, ptr, length + 1);
 }
 
-void sort(Contact contacts[]) {
+void printContacts(Contact contacts[NAME]){
+    int i = 0;
+    while (i <= sizeof(contacts)){
+        printf("%s ", contacts[i].first_name);
+        printf("%s ", contacts[i].last_name);
+        printf("%s ", contacts[i].address.street);
+        printf("%s ", contacts[i].address.city);
+        printf("%s ", contacts[i].address.state);
+        printf("%s ", contacts[i].address.zip);
+        printf("%s\n\n", contacts[i].telephone);
+        i++;
+    }
+    printf("%s\n", "-------------------------------");
+}
+
+void sort(Contact contacts[NAME]) {
 
 }
 
-void readFile(FILE *file){
-    Contact contacts[NAME];
+void readFile(FILE *file, Contact contacts[NAME]) {
     char str[NUM];
     int i = 0;
     while (fgets(str, NUM, file) != NULL){
@@ -69,9 +83,14 @@ void readFile(FILE *file){
 int main(int argc, char *argv[]){
     FILE *file;
     FILE *output;
-
+    Contact contacts[NAME];
     file = fopen(argv[1], "r");
-    readFile(file);
+    readFile(file, contacts);
+    printf("%s\n", "\n[BEFORE SORT]\n-------------------------------");
+    printContacts(contacts);
+    sort(contacts);
+    printf("%s\n", "\n[AFTER SORT]\n-------------------------------");
+    printContacts(contacts);
     fclose(file);
     return (0);
 }

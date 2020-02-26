@@ -49,13 +49,13 @@ void sort(Contact contacts[], int num) {
     for (int i = 0; i < num; ++i) {
         for (int j = i + 1; j < num; ++j) {
             //-1 is left bigger, 1 is right bigger, 0 means equal
-            if (strcasecmp(contacts[i].first_name, contacts[j].first_name) == RIGHT){
+            if (strcasecmp(contacts[i].first_name, contacts[j].first_name) > EQ){
                 Contact temp = copy(contacts[j]);
                 contacts[j] = contacts[i];
                 contacts[i] = temp;
             }
             else if (strcasecmp(contacts[i].first_name, contacts[j].first_name) == EQ){
-                if (strcasecmp(contacts[i].last_name, contacts[j].last_name) == RIGHT){
+                if (strcasecmp(contacts[i].last_name, contacts[j].last_name) > EQ){
                     Contact temp = copy(contacts[j]);
                     contacts[j] = contacts[i];
                     contacts[i] = temp;

@@ -28,7 +28,7 @@ Contact copy(Contact contact){
     return temp;
 }
 
-void printContacts(Contact contacts[], int num){
+void print_contacts(Contact contacts[], int num){
     int i = 0;
     while (i < num) {
         printf("%s ", contacts[i].first_name);
@@ -44,18 +44,16 @@ void printContacts(Contact contacts[], int num){
 }
 
 void sort(Contact contacts[], int num) {
-    int RIGHT = 1;
     int EQ = 0;
     for (int i = 0; i < num; ++i) {
         for (int j = i + 1; j < num; ++j) {
-            //-1 is left bigger, 1 is right bigger, 0 means equal
-            if (strcasecmp(contacts[i].first_name, contacts[j].first_name) > EQ){
+            if (strcasecmp(contacts[i].last_name, contacts[j].last_name) > EQ){
                 Contact temp = copy(contacts[j]);
                 contacts[j] = contacts[i];
                 contacts[i] = temp;
             }
-            else if (strcasecmp(contacts[i].first_name, contacts[j].first_name) == EQ){
-                if (strcasecmp(contacts[i].last_name, contacts[j].last_name) > EQ){
+            else if (strcasecmp(contacts[i].last_name, contacts[j].last_name) == EQ){
+                if (strcasecmp(contacts[i].first_name, contacts[j].first_name) > EQ){
                     Contact temp = copy(contacts[j]);
                     contacts[j] = contacts[i];
                     contacts[i] = temp;
@@ -65,7 +63,7 @@ void sort(Contact contacts[], int num) {
     }
 }
 
-int readFile(FILE *file, Contact contacts[]) {
+int read_file(FILE *file, Contact contacts[]) {
     char str[NUM];
     int i = 0;
     while (fgets(str, NUM, file) != NULL){
@@ -111,17 +109,24 @@ int readFile(FILE *file, Contact contacts[]) {
     return i;
 }
 
+void write_to_file(FILE *output, Contact contacts[], int num){
+
+}
+
 int main(int argc, char *argv[]){
     FILE *file;
     FILE *output;
     Contact contacts[NAME];
     file = fopen(argv[1], "r");
-    int num = readFile(file, contacts);
+    int num = read_file(file, contacts);
     printf("%s\n", "\n[BEFORE SORT]\n-------------------------------");
-    printContacts(contacts, num);
+    print_contacts(contacts, num);
     sort(contacts, num);
     printf("%s\n", "\n[AFTER SORT]\n-------------------------------");
-    printContacts(contacts, num);
+    print_contacts(contacts, num);
     fclose(file);
+    output = fopen(argv[2], "w+");
+    write_to_file(output, contacts, num);
+
     return (0);
 }

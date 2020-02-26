@@ -16,6 +16,18 @@ void trim(char *string) {
     memmove(string, ptr, length + 1);
 }
 
+Contact copy(Contact contact){
+    Contact temp;
+    strcpy(temp.first_name, contact.first_name);
+    strcpy(temp.last_name, contact.last_name);
+    strcpy(temp.address.city, contact.address.city);
+    strcpy(temp.address.street, contact.address.street);
+    strcpy(temp.address.state, contact.address.state);
+    strcpy(temp.address.zip, contact.address.zip);
+    strcpy(temp.telephone, contact.telephone);
+    return temp;
+}
+
 void printContacts(Contact contacts[], int num){
     int i = 0;
     while (i < num) {
@@ -38,16 +50,16 @@ void sort(Contact contacts[], int num) {
         for (int j = i + 1; j < num; ++j) {
             //-1 is left bigger, 1 is right bigger, 0 means equal
             if (strcasecmp(contacts[i].first_name, contacts[j].first_name) == RIGHT){
-                char temp[NAME];
-                strcpy(temp, contacts[j].first_name);
-                strcpy(contacts[j].first_name, contacts[i].first_name);
-                strcpy(contacts[i].first_name, temp);
+                Contact temp = copy(contacts[j]);
+                contacts[j] = contacts[i];
+                contacts[i] = temp;
             }
             else if (strcasecmp(contacts[i].first_name, contacts[j].first_name) == EQ){
-                /*char temp[NAME];
-                strcpy(temp, contacts[j].last_name);
-                strcpy(contacts[j].last_name, contacts[i].last_name);
-                strcpy(contacts[i].last_name, temp);*/
+                if (strcasecmp(contacts[i].last_name, contacts[j].last_name) == RIGHT){
+                    Contact temp = copy(contacts[j]);
+                    contacts[j] = contacts[i];
+                    contacts[i] = temp;
+                }
             }
         }
     }

@@ -110,7 +110,15 @@ int read_file(FILE *file, Contact contacts[]) {
 }
 
 void write_to_file(FILE *output, Contact contacts[], int num){
-
+    for (int i = 0; i < num; ++i) {
+        fprintf(output, "%s,  ", contacts[i].first_name);
+        fprintf(output, "%s,  ", contacts[i].last_name);
+        fprintf(output, "%s,  ", contacts[i].address.street);
+        fprintf(output, "%s,  ", contacts[i].address.city);
+        fprintf(output, "%s,  ", contacts[i].address.state);
+        fprintf(output, "%s,  ", contacts[i].address.zip);
+        fprintf(output, "%s\n", contacts[i].telephone);
+    }
 }
 
 int main(int argc, char *argv[]){
@@ -119,11 +127,11 @@ int main(int argc, char *argv[]){
     Contact contacts[NAME];
     file = fopen(argv[1], "r");
     int num = read_file(file, contacts);
-    printf("%s\n", "\n[BEFORE SORT]\n-------------------------------");
-    print_contacts(contacts, num);
+    //printf("%s\n", "\n[BEFORE SORT]\n-------------------------------");
+    //print_contacts(contacts, num);
     sort(contacts, num);
-    printf("%s\n", "\n[AFTER SORT]\n-------------------------------");
-    print_contacts(contacts, num);
+    //printf("%s\n", "\n[AFTER SORT]\n-------------------------------");
+    //print_contacts(contacts, num);
     fclose(file);
     output = fopen(argv[2], "w+");
     write_to_file(output, contacts, num);

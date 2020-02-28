@@ -24,3 +24,5 @@ sorting algorithms in C and methods of reading/writing files using C.
 struct_sort.c
 
 struct_sort.h
+
+contacts.txt

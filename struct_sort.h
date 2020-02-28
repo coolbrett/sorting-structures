@@ -1,23 +1,30 @@
+/**
+ * @author Brett Dale
+ * @version 1.0 (2/28/2020)
+ *
+ * This file is the header file for the C source file struct_sort.c
+ */
+
 #include <stdio.h>
 #include <string.h>
-#define NUM 100
-#define STREET 30
-#define NAME 20
-#define STATE 3
-#define ZIP 6
-#define TELEPHONE 13
-
+#include <ctype.h>
+#define NUM 100 /** Constant for reading file in */
+#define STREET 30 /** Constant for Street and City char arrays */
+#define NAME 20 /** Constant for First and Last name char arrays */
+#define STATE 3 /** Constant for State */
+#define ZIP 6 /** Constant for Zip code */
+#define TELEPHONE 13 /** Constant for Telephone */
 
 typedef struct {
-    char street[STREET];
-    char city[STREET];
-    char state[STATE];
-    char zip[ZIP];
+    char street[STREET]; /** Field for street name */
+    char city[STREET]; /** Field for city name */
+    char state[STATE]; /** Field for state acronym */
+    char zip[ZIP]; /** Field for Zip code */
 }Address;
 
 typedef struct {
-    char first_name[NAME];
-    char last_name[NAME];
-    Address address;
-    char telephone[TELEPHONE];
+    char first_name[NAME]; /** Field for first name */
+    char last_name[NAME]; /** Field for last name */
+    Address address; /** Field for address struct */
+    char telephone[TELEPHONE]; /** Field for telephone number */
 }Contact;

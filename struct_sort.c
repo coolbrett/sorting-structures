@@ -1,11 +1,16 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include "struct_sort.h"
-#include <ctype.h>
+/**
+ * @author Brett Dale
+ * @version 1.0 (2/28/2020)
+ *
+ * This C source file creates a collection of Contacts and sorts them by
+ * last name first, then first name if last name's are the same.
+ */
 
-//COMMENT THEN README
-//WRITE METHOD SIGNATURES IN HEADER
+#include "struct_sort.h" /** Header file for the source file */
 
+/**
+ * This method eliminates all whitespace leading or trailing the string passed
+ */
 void trim(char *string) {
     char *ptr = string;
     int length = strlen(ptr);
@@ -19,6 +24,12 @@ void trim(char *string) {
     memmove(string, ptr, length + 1);
 }
 
+/**
+ * This method copy's the Contact struct passed in and returns the copy
+ *
+ * @param contact contact to be copied
+ * @return Copy of Contact struct passed
+ */
 Contact copy(Contact contact){
     Contact temp;
     strcpy(temp.first_name, contact.first_name);
@@ -31,6 +42,13 @@ Contact copy(Contact contact){
     return temp;
 }
 
+/**
+ * This method was used in the building process to display all contacts
+ * in the Contact struct passed
+ *
+ * @param contacts contacts array
+ * @param num number of elements in array
+ */
 void print_contacts(Contact contacts[], int num){
     int i = 0;
     while (i < num) {
@@ -46,6 +64,13 @@ void print_contacts(Contact contacts[], int num){
     printf("%s\n", "-------------------------------");
 }
 
+/**
+ * This method sorts the Contact array passed in order of last name
+ * first, then first name if last names are the same
+ *
+ * @param contacts contacts array
+ * @param num number of elements in array passed
+ */
 void sort(Contact contacts[], int num) {
     int EQ = 0;
     for (int i = 0; i < num; ++i) {
@@ -66,6 +91,13 @@ void sort(Contact contacts[], int num) {
     }
 }
 
+/**
+ * This method reads in file passed in and creates Contact structs that
+ * eventually go into the contacts array passed
+ * @param file file to be read from
+ * @param contacts contacts array to place Contact structs
+ * @return integer of elements placed into contacts array
+ */
 int read_file(FILE *file, Contact contacts[]) {
     char str[NUM];
     int i = 0;
@@ -112,6 +144,12 @@ int read_file(FILE *file, Contact contacts[]) {
     return i;
 }
 
+/**
+ * This method writes the sorted contacts array passed in to the file passed in
+ * @param output file to be written to
+ * @param contacts array of Contact structs
+ * @param num number of elements in contacts array
+ */
 void write_to_file(FILE *output, Contact contacts[], int num){
     for (int i = 0; i < num; ++i) {
         fprintf(output, "%s,  ", contacts[i].first_name);
@@ -124,20 +162,22 @@ void write_to_file(FILE *output, Contact contacts[], int num){
     }
 }
 
+/**
+ * Main method that runs the file
+ * @param argc number of how many arguments were passed
+ * @param argv array of command line arguments passed
+ * @return 0
+ */
 int main(int argc, char *argv[]){
     FILE *file;
     FILE *output;
     Contact contacts[NAME];
     file = fopen(argv[1], "r");
     int num = read_file(file, contacts);
-    //printf("%s\n", "\n[BEFORE SORT]\n-------------------------------");
-    //print_contacts(contacts, num);
     sort(contacts, num);
-    //printf("%s\n", "\n[AFTER SORT]\n-------------------------------");
-    //print_contacts(contacts, num);
     fclose(file);
-    output = fopen(argv[2], "w+");
+    output = fopen(argv[2], "w");
     write_to_file(output, contacts, num);
-
+    fclose(output);
     return (0);
 }

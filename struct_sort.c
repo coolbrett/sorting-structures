@@ -3,6 +3,9 @@
 #include "struct_sort.h"
 #include <ctype.h>
 
+//COMMENT THEN README
+//WRITE METHOD SIGNATURES IN HEADER
+
 void trim(char *string) {
     char *ptr = string;
     int length = strlen(ptr);

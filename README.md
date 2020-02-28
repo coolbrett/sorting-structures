@@ -15,12 +15,12 @@ Once compiled, use the command `./struct_sort <contact text file> sorted_contact
 
 Now that the program has run, open _sorted_contacts.txt_ using the command `vim sorted_contacts.txt`
 
-# Purpose of the Project
+## Purpose of the Project
 This project was meant to give us experience using the C programming language and to get us familiar
 with basics of C such as syntax, structures, pointers etc. Other purposes included learning how to write
 sorting algorithms in C and methods of reading/writing files using C.
 
-# Files Included
+## Files Included
 struct_sort.c
 
 struct_sort.h

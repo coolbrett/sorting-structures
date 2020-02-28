@@ -7,6 +7,7 @@
 
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 #include <ctype.h>
 #define NUM 100 /** Constant for reading file in */
 #define STREET 30 /** Constant for Street and City char arrays */
@@ -28,3 +29,15 @@ typedef struct {
     Address address; /** Field for address struct */
     char telephone[TELEPHONE]; /** Field for telephone number */
 }Contact;
+
+void trim(char *string);
+
+Contact copy(Contact contact);
+
+void print_contacts(Contact contacts[], int num);
+
+void sort(Contact contacts[], int num);
+
+int read_file(FILE *file, Contact contacts[]);
+
+void write_to_file(FILE *output, Contact contacts[], int num);
